@@ -61,6 +61,7 @@ public class NfcReader {
 
             if (line.contains(":")) {
                 String[] vars = line.split(":");
+                vars[1] = vars[1].trim(); // remove spaces
 
                 if (vars.length == 2) {
                     if (vars[0].equals("Record type")) {
@@ -88,7 +89,7 @@ public class NfcReader {
                         card.setSAK(vars[1]);
                     }
                     else if (vars[0].equals("ISO14443A UID")) {
-                        card.setUri(vars[1]);
+                        card.setUID(vars[1]);
                     }
                 }
             }
