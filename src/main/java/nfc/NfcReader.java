@@ -7,12 +7,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
+/**
+ * Manages the nfc reader data
+ */
 public class NfcReader {
 
     private static String NFC_SOFTWARE_NAME = "explorenfc-basic";
 
     /**
-     * Generates a String given by the Nfc card software when the card touch
+     * Generates a String given by the Nfc card software when the card touch the reader
+     * This is is a thread blocking method
      *
      * @return StringBuilder
      */
@@ -51,6 +55,11 @@ public class NfcReader {
         return null;
     }
 
+    /**
+     * Wait until an NFC card is read by the device
+     *
+     * @return NfcCard
+     */
     public NfcCard readCard() {
         final StringBuilder reader = waitForNfcData();
         final Scanner scanner = new Scanner(reader.toString());

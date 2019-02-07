@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Represents all the data given by the explorenfc software
+ * Represents a NFC card read by the reader device
  */
 public class NfcCard {
 
