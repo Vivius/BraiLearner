@@ -58,7 +58,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        Launcher
+                                        helpers.AudioFilePlayer
                                     </mainClass>
                                 </manifest>
                             </archive>

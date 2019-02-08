@@ -16,7 +16,8 @@ public class AudioFilePlayer {
 
     public static void main(String[] args) {
         final AudioFilePlayer player = new AudioFilePlayer();
-        player.play(ClassLoader.getSystemResource("commons/intro.mp3").getFile());
+        System.out.println(player.getClass().getResource("../commons/intro.mp3").getFile());
+        player.play(player.getClass().getResource("../commons/intro.mp3").getFile());
     }
 
     public void play(String filePath) {
