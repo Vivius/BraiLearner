@@ -10,4 +10,9 @@
       </profile>
     </annotationProcessing>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="BraiLearner" options="-bootclasspath &quot;C:\Users\Vincent\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\183.5429.30\jre64\lib\resources.jar;C:\Users\Vincent\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\183.5429.30\jre64\lib\rt.jar;C:\Users\Vincent\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\183.5429.30\jre64\lib\sunrsasign.jar;C:\Users\Vincent\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\183.5429.30\jre64\lib\jsse.jar;C:\Users\Vincent\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\183.5429.30\jre64\lib\jce.jar;C:\Users\Vincent\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\183.5429.30\jre64\lib\charsets.jar;C:\Users\Vincent\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\183.5429.30\jre64\lib\jfr.jar;C:\Users\Vincent\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\183.5429.30\jre64\classes;C:/Program Files/Java/jdk1.8.0_161/jre/lib/jfxrt.jar&quot;" />
+    </option>
+  </component>
 </project>
