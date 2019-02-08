@@ -10,19 +10,20 @@ public class Game {
     }
 
     public void game(){
+        Deck deck = new Deck();
         System.out.println("Bonjour vous allez commencez le jeu");
         int nb = 1;
         NfcCard card;
         boolean trouve = false;
         do{
-            String valeur = "Groupe 5";
-            System.out.println("Le mot chercher est 'Groupe 5'");
+            NfcCard mot = deck.choixAleatoire();
+            System.out.println("Le mot chercher est " + mot.getTitle());
 
             do {
                 System.out.println("Présentez carte");
                 NfcReader nfcReader = new NfcReader();
                 card = nfcReader.readCard();
-                trouve = check(valeur, card.getTitle());
+                trouve = check(mot.getTitle(), card.getTitle());
                 if (trouve)
                     System.out.println("Vous avez trouvé le bon mot");
                 else
