@@ -16,9 +16,12 @@ public class Launcher {
         // System.out.println(nfcReader.readCard());
 
         try {
-            InputStream audio = Thread.currentThread().getContextClassLoader().getResourceAsStream("commons/intro.mp3");
+            InputStream audio = Thread.currentThread().getContextClassLoader().getResourceAsStream("commons/sample.mp3");
+            System.out.println(audio);
+
             Player player = new Player(audio);
             player.play();
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
