@@ -1,7 +1,7 @@
 import javazoom.jl.player.Player;
 import nfc.NfcReader;
 
-import java.io.FileInputStream;
+import java.io.InputStream;
 
 public class Launcher {
 
@@ -16,8 +16,8 @@ public class Launcher {
         // System.out.println(nfcReader.readCard());
 
         try {
-            System.out.println(getClass().getResourceAsStream("commons/intro.mp3"));
-            Player player = new Player(getClass().getResourceAsStream("commons/intro.mp3"));
+            InputStream audio = Thread.currentThread().getContextClassLoader().getResourceAsStream("commons/intro.mp3");
+            Player player = new Player(audio);
             player.play();
         } catch (Exception e) {
             System.out.println(e.getMessage());
