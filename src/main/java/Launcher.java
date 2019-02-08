@@ -1,3 +1,4 @@
+import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import nfc.NfcReader;
 
@@ -18,9 +19,9 @@ public class Launcher {
 
         // NfcReader nfcReader = new NfcReader();
         // System.out.println(nfcReader.readCard());
-
+        /*
         try {
-            InputStream audioFileStream = Thread.currentThread()
+           InputStream audioFileStream = Thread.currentThread()
                     .getContextClassLoader()
                     .getResourceAsStream("commons/music.wav");
 
@@ -40,12 +41,7 @@ public class Launcher {
             clip.open(audioInputStream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
 
-           /* InputStream audio = Thread.currentThread()
-                    .getContextClassLoader()
-                    .getResourceAsStream("commons/music.wav");
 
-            Player player = new Player(audio);
-            player.play();*/
 
         } catch (LineUnavailableException e) {
             e.printStackTrace();
@@ -54,6 +50,21 @@ public class Launcher {
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         }
+
+        */
+
+         InputStream audio = Thread.currentThread()
+                    .getContextClassLoader()
+                    .getResourceAsStream("commons/intro.mp3");
+
+        Player player = null;
+        try {
+            player = new Player(audio);
+            player.play();
+        } catch (JavaLayerException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static void main(String[] args) {
