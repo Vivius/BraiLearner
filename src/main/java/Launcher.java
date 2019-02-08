@@ -1,8 +1,12 @@
 import javazoom.jl.player.Player;
 import nfc.NfcReader;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.io.InputStream;
+import java.io.Reader;
 
 public class Launcher {
 
@@ -17,12 +21,21 @@ public class Launcher {
         // System.out.println(nfcReader.readCard());
 
         try {
-            InputStream audio = Thread.currentThread()
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(Thread.currentThread()
                     .getContextClassLoader()
-                    .getResourceAsStream("commons/sample.mp3");
+                    .getResourceAsStream("commons/music.wav"));
+
+            Clip clip = AudioSystem.getClip();
+
+            clip.open(audioInputStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+           /* InputStream audio = Thread.currentThread()
+                    .getContextClassLoader()
+                    .getResourceAsStream("commons/music.wav");
 
             Player player = new Player(audio);
-            player.play();
+            player.play();*/
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
