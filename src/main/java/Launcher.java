@@ -5,8 +5,8 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
+import java.io.BufferedInputStream;
 import java.io.InputStream;
-import java.io.Reader;
 
 public class Launcher {
 
@@ -21,9 +21,15 @@ public class Launcher {
         // System.out.println(nfcReader.readCard());
 
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(Thread.currentThread()
+            InputStream audioFileStream = Thread.currentThread()
                     .getContextClassLoader()
-                    .getResourceAsStream("commons/music.wav"));
+                    .getResourceAsStream("commons/music.wav");
+
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(audioFileStream);
+
+            System.out.println(audioFileStream);
+
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedInputStream);
 
             Clip clip = AudioSystem.getClip();
 
