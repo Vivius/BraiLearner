@@ -16,14 +16,14 @@ public class AudioFilePlayer {
 
     public static void main(String[] args) {
         final AudioFilePlayer player = new AudioFilePlayer();
-        System.out.println(player.getClass().getResource("../commons/intro.mp3").getFile());
-        player.play(player.getClass().getResource("../commons/intro.mp3").getFile());
+        System.out.println(Thread.currentThread().getContextClassLoader().getResource("commons/intro.mp3"));
+        player.play();
     }
 
-    public void play(String filePath) {
-        final File file = new File(filePath);
+    public void play() {
+        //final File file = new File(Thread.currentThread().getContextClassLoader().getResource("commons/intro.mp3"));
 
-        try (final AudioInputStream in = getAudioInputStream(file)) {
+        try (final AudioInputStream in = getAudioInputStream(Thread.currentThread().getContextClassLoader().getResource("commons/intro.mp3"))) {
 
             final AudioFormat outFormat = getOutFormat(in.getFormat());
             final Info info = new Info(SourceDataLine.class, outFormat);
