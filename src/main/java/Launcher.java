@@ -1,11 +1,10 @@
 import javazoom.jl.player.Player;
 import nfc.NfcReader;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 public class Launcher {
@@ -43,9 +42,12 @@ public class Launcher {
             Player player = new Player(audio);
             player.play();*/
 
-        } catch (Exception e) {
-            System.out.println("Erreur : " + e.getMessage());
-            e.getStackTrace();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
         }
     }
 
