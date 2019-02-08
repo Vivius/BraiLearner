@@ -1,6 +1,8 @@
 import javazoom.jl.player.Player;
 import nfc.NfcReader;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.InputStream;
 
 public class Launcher {
@@ -28,6 +30,26 @@ public class Launcher {
     }
 
     public static void main(String[] args) {
-        new Launcher().start();
+
+        Runnable main = () -> {
+            new Launcher().start();
+        };
+
+        Thread thread = new Thread(main);
+        thread.start();
+
+        //1. Create the frame.
+        JFrame frame = new JFrame("BraiLearner");
+
+        //2. Optional: What happens when the frame closes?
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //4. Size the frame.
+        frame.pack();
+
+        //5. Show it.
+        frame.setVisible(true);
+
+        // new Launcher().start();
     }
 }
