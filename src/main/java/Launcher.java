@@ -16,7 +16,7 @@ public class Launcher {
         // System.out.println(nfcReader.readCard());
 
         try {
-            Player player = new Player(new FileInputStream("commons/intro.mp3"));
+            Player player = new Player(getClass().getResourceAsStream("commons/intro.mp3"));
             player.play();
         } catch (Exception e) {
             e.printStackTrace();
