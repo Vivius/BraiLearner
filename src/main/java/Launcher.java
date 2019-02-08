@@ -1,13 +1,13 @@
-import nfc.NfcReader;
+import game.Game;
 
 public class Launcher {
 
     public static void main(String[] args) {
         System.out.println("BraiLearner ready !");
 
-        NfcReader nfcReader = new NfcReader();
+        Game game = new Game();
+        game.game();
 
-        System.out.println(nfcReader.readCard());
 
     }
 }
