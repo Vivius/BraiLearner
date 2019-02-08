@@ -18,7 +18,7 @@ public class Launcher {
 
          final InputStream audio = Thread.currentThread()
                     .getContextClassLoader()
-                    .getResourceAsStream("commons/music.wav");
+                    .getResourceAsStream("commons/sample.mp3");
 
         Player player = null;
         try {
