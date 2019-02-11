@@ -13,10 +13,12 @@ public class Game implements Listenable {
         deck.listen();
 
         int nb = deck.getSize();
-        boolean cardFound = false;
+        boolean cardFound;
 
         do {
             final GameCard cardToFind = deck.getRandomCard();
+            cardFound = false;
+
             System.out.println("Word to find : " + cardToFind.getName());
 
             listenFindCard();
@@ -27,15 +29,19 @@ public class Game implements Listenable {
 
                 final GameCard userCard = deck.findCardFromNfc(nfcReader.readCard());
 
-                cardFound = cardToFind.equals(userCard);
+                // TODO : manage null result
+                if (userCard != null) {
 
-                if (cardFound) {
-                    System.out.println("Correct word :)");
-                    listenCorrectWord();
-                }
-                else {
-                    System.out.println("Incorrect word " + cardToFind.getName() + " /= " + userCard.getName());
-                    listenIncorrectWord();
+                    cardFound = cardToFind.equals(userCard);
+
+                    if (cardFound) {
+                        System.out.println("Correct word :)");
+                        listenCorrectWord();
+                    }
+                    else {
+                        System.out.println("Incorrect word " + cardToFind.getName() + " /= " + userCard.getName());
+                        listenIncorrectWord();
+                    }
                 }
 
             } while(!cardFound);
