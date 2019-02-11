@@ -12,7 +12,7 @@ public class Game implements Listenable {
 
         deck.listen();
 
-        int nb = 1;
+        int nb = deck.getTaille();
         boolean cardFound = false;
 
         do {
@@ -40,6 +40,7 @@ public class Game implements Listenable {
 
             } while(!cardFound);
 
+            deck.removeCard(cardToFind);
             nb--;
 
         } while(nb > 0);
