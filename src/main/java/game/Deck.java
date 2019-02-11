@@ -1,33 +1,37 @@
 package game;
 
-import model.NfcCard;
+import game.contracts.Listenable;
+import tools.AudioPlayer;
+import tools.nfc.NfcCard;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-public class Deck {
+public class Deck implements Listenable {
 
-    private NfcCard liste[] = new NfcCard[2];
+    private String name = "default";
+    private List<GameCard> cards = new ArrayList<>();
 
-    NfcCard carte1 = new NfcCard("","","lion","","","","","","04787D22665D80");
-    NfcCard carte2 = new NfcCard("","","girafe","","","","","","04DC7D22665D80");
+    public Deck() {
+        final NfcCard nfcCard_1 = new NfcCard("04DC7D22665D80");
+        final GameCard gameCard_1 = new GameCard("Lion", "decks/default/cards/lion.mp3", nfcCard_1);
 
-    public Deck(){
-        liste[0]= carte1;
-        liste[1]= carte2;
+        final NfcCard nfcCard_2 = new NfcCard("04DC7D22665D80", "Girafe");
+        final GameCard gameCard_2 = new GameCard("Girafe", "decks/default/cards/girage.mp3", nfcCard_2);
+
+        cards.add(gameCard_1);
+        cards.add(gameCard_2);
     }
 
-    public NfcCard choixAleatoire(){
-        Random rnd = new Random();
-        int nombre = rnd.nextInt(2);
-        NfcCard card = liste[nombre-1];
-        return card;
+    public GameCard getRandomCard() {
+        final Random rnd = new Random();
+        int randomIndex = rnd.nextInt(cards.size());
+        return cards.get(randomIndex);
     }
 
-    /*
-    public NfcCard[] deck(){
-
-        return deck;
-    }*/
-
+    @Override
+    public void listen() {
+        AudioPlayer.playSound("decks/default/intro.mp3");
+    }
 }

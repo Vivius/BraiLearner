@@ -1,7 +1,7 @@
 package game;
 
-import model.NfcCard;
-import tools.NfcReader;
+import tools.nfc.NfcCard;
+import tools.nfc.NfcReader;
 
 public class Game {
 
@@ -9,30 +9,38 @@ public class Game {
         return valeur.equals(carte);
     }
 
-    public void game(){
-        Deck deck = new Deck();
+    public void play(Deck deck, NfcReader nfcReader) {
         System.out.println("Bonjour vous allez commencez le jeu");
+        deck.listen();
+
         int nb = 1;
         NfcCard card;
-        boolean trouve = false;
-        do{
-            NfcCard mot = deck.choixAleatoire();
-            System.out.println("Le mot chercher est " + mot.getTitle());
+        boolean found = false;
+
+        do {
+            final GameCard cardToFind = deck.getRandomCard();
+            System.out.println("Le mot chercher est " + cardToFind.getName());
+            cardToFind.listen();
 
             do {
                 System.out.println("Présentez carte");
-                NfcReader nfcReader = new NfcReader();
-                card = nfcReader.readCard();
-                trouve = check(mot.getTitle(), card.getTitle());
-                if (trouve)
-                    System.out.println("Vous avez trouvé le bon mot");
-                else
-                    System.out.println("Faux ceci est le mot "+card.getTitle());
 
-            }while(! trouve);
+                card = nfcReader.readCard();
+                found = cardToFind.getNfcCard().equals(card);
+
+                if (found) {
+                    System.out.println("Vous avez trouvé le bon mot");
+                }
+                else {
+                    System.out.println("Faux ceci est le mot "+card.getTitle());
+                }
+
+            } while(!found);
 
             nb--;
-        } while(nb>0);
+
+        } while(nb > 0);
+
         System.out.println("Jeu finis");
     }
 

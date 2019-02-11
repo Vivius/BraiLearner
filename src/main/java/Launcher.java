@@ -1,4 +1,6 @@
+import game.Deck;
 import game.Game;
+import tools.nfc.NfcReader;
 
 public class Launcher {
 
@@ -9,8 +11,11 @@ public class Launcher {
     private void start() {
         System.out.println("BraiLearner ready !");
 
-        Game game = new Game();
-        game.game();
+        final Game game = new Game();
+        final NfcReader nfcReader = new NfcReader();
+        final Deck deck = new Deck();
+
+        game.play(deck, nfcReader);
     }
 
     public static void main(String[] args) {
