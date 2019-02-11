@@ -4,10 +4,6 @@ import tools.nfc.NfcReader;
 
 public class Launcher {
 
-    public Launcher() {
-
-    }
-
     private void start() {
         System.out.println("BraiLearner ready !");
 

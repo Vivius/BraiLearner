@@ -28,6 +28,11 @@ public class GameCard implements Listenable {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        return this.getNfcCard().equals(((GameCard) obj).getNfcCard());
+    }
+
+    @Override
     public String toString() {
         return "GameCard{" +
                 "name='" + name + '\'' +

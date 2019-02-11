@@ -2,19 +2,18 @@ package game;
 
 import game.contracts.Listenable;
 import tools.AudioPlayer;
-import tools.nfc.NfcCard;
 import tools.nfc.NfcReader;
 
 public class Game implements Listenable {
 
-    public void play(Deck deck, NfcReader nfcReader) {
+    public void play(final Deck deck, final NfcReader nfcReader) {
         System.out.println("Game started with default deck");
         listen();
+
         deck.listen();
 
         int nb = 1;
-        NfcCard card;
-        boolean found = false;
+        boolean cardFound = false;
 
         do {
             final GameCard cardToFind = deck.getRandomCard();
@@ -26,19 +25,20 @@ public class Game implements Listenable {
             do {
                 System.out.println("Scan card when ready...");
 
-                card = nfcReader.readCard();
-                found = cardToFind.getNfcCard().equals(card);
+                final GameCard userCard = deck.findCardFromNfc(nfcReader.readCard());
 
-                if (found) {
+                cardFound = cardToFind.equals(userCard);
+
+                if (cardFound) {
                     System.out.println("Correct word :)");
                     listenCorrectWord();
                 }
                 else {
-                    System.out.println("Incorrect word " + cardToFind.getName() + " /= " + card.getTitle());
+                    System.out.println("Incorrect word " + cardToFind.getName() + " /= " + userCard.getName());
                     listenIncorrectWord();
                 }
 
-            } while(!found);
+            } while(!cardFound);
 
             nb--;
 
@@ -53,15 +53,15 @@ public class Game implements Listenable {
         AudioPlayer.playSound("commons/consigne.mp3");
     }
 
-    public void listenFindCard() {
+    private void listenFindCard() {
         AudioPlayer.playSound("commons/find_card.mp3");
     }
 
-    public void listenCorrectWord() {
+    private void listenCorrectWord() {
         AudioPlayer.playSound("advises/correct_word.mp3");
     }
 
-    public void listenIncorrectWord() {
+    private void listenIncorrectWord() {
         AudioPlayer.playSound("advises/incorrect_word.mp3");
     }
 }

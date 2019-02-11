@@ -7,21 +7,28 @@ import tools.nfc.NfcCard;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Deck implements Listenable {
 
-    private String name = "default";
+    private String name;
     private List<GameCard> cards = new ArrayList<>();
 
     public Deck() {
-        final NfcCard nfcCard_1 = new NfcCard("04787D22665D80");
-        final GameCard gameCard_1 = new GameCard("Lion", "decks/default/cards/lion.mp3", nfcCard_1);
+        initDefaultDeck();
+    }
 
-        final NfcCard nfcCard_2 = new NfcCard("04DC7D22665D80", "Girafe");
-        final GameCard gameCard_2 = new GameCard("Girafe", "decks/default/cards/girafe.mp3", nfcCard_2);
+    private void initDefaultDeck() {
+        this.name = "default";
 
-        cards.add(gameCard_1);
-        cards.add(gameCard_2);
+        final NfcCard nfcCardLion = new NfcCard("04787D22665D80", "Lion");
+        final NfcCard nfcCardGirafe = new NfcCard("04DC7D22665D80", "Girafe");
+
+        final GameCard gameCardLion = new GameCard("Lion", "decks/default/cards/lion.mp3", nfcCardLion);
+        final GameCard gameCardGirafe = new GameCard("Girafe", "decks/default/cards/girafe.mp3", nfcCardGirafe);
+
+        cards.add(gameCardLion);
+        cards.add(gameCardGirafe);
     }
 
     public GameCard getRandomCard() {
@@ -30,8 +37,27 @@ public class Deck implements Listenable {
         return cards.get(randomIndex);
     }
 
+    public GameCard findCardFromNfc(final NfcCard nfcCard) {
+        List<GameCard> result = cards.stream()
+                .filter(card -> card.getNfcCard().equals(nfcCard))
+                .collect(Collectors.toList());
+
+        if (result.size() > 0) {
+            return result.get(0);
+        }
+        return null;
+    }
+
     @Override
     public void listen() {
         AudioPlayer.playSound("decks/default/intro.mp3");
+    }
+
+    @Override
+    public String toString() {
+        return "Deck{" +
+                "name='" + name + '\'' +
+                ", cards=" + cards +
+                '}';
     }
 }
