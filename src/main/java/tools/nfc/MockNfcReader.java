@@ -1,7 +1,9 @@
 package tools.nfc;
 
+import game.Deck;
 import game.Game;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -9,22 +11,24 @@ import java.util.Random;
  */
 public class MockNfcReader implements CardReader {
 
-    private NfcCard fakeCard;
-    private Game game;
+    private NfcCard fakeCard = null;
+    private Game game = null;
+    private Deck deck = null;
 
     public MockNfcReader() {
-        this.game = null;
-        this.fakeCard = null;
+
     }
 
     public MockNfcReader(Game game) {
         this.game = game;
-        this.fakeCard = null;
     }
 
     public MockNfcReader(NfcCard nfcCard) {
-        this.game = null;
         this.fakeCard = nfcCard;
+    }
+
+    public MockNfcReader(Deck deck) {
+        this.deck = deck;
     }
 
     @Override
@@ -37,6 +41,9 @@ public class MockNfcReader implements CardReader {
             int randNumber = random.nextInt(game.getNfcCards().size());
             return game.getNfcCards().get(randNumber);
         }
+        else if (deck != null) {
+            return deck.getRandomCardNotIn(new ArrayList<>()).getNfcCard();
+        }
         return null;
     }
 
@@ -46,5 +53,9 @@ public class MockNfcReader implements CardReader {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public void setDeck(Deck deck) {
+        this.deck = deck;
     }
 }

@@ -86,6 +86,7 @@ public class Game implements Listenable {
                 }
                 else {
                     System.out.println("Card not present in this deck");
+                    listenCardNotInDeck();
                 }
 
             } while(!cardFound);
@@ -125,5 +126,9 @@ public class Game implements Listenable {
 
     private void listenIncorrectWord() {
         AudioPlayer.play("advises/incorrect_word.mp3");
+    }
+
+    private void listenCardNotInDeck() {
+        AudioPlayer.play("errors/card_not_in_deck.mp3");
     }
 }

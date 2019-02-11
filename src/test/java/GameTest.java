@@ -10,7 +10,7 @@ public class GameTest {
         MockNfcReader cardReader = new MockNfcReader();
         Game game = new Game(cardReader);
 
-        cardReader.setGame(game);
+        cardReader.setDeck(game.getDefaultDeck());
 
         game.play(game.getDefaultDeck());
 
