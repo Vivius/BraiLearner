@@ -24,8 +24,8 @@ public class NfcCard {
     }
 
     public NfcCard(String UID, String title) {
-        this.title = title;
         this.UID = UID;
+        this.title = title;
     }
 
     @Override

@@ -4,7 +4,6 @@ import game.contracts.Listenable;
 import tools.AudioPlayer;
 import tools.nfc.NfcCard;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -12,39 +11,40 @@ import java.util.stream.Collectors;
 public class Deck implements Listenable {
 
     private String name;
-    private List<GameCard> cards = new ArrayList<>();
+    private List<GameCard> cards;
 
-    public Deck() {
-        initDefaultDeck();
+    public Deck(final String name, final List<GameCard> cards) {
+        this.name = name;
+        this.cards = cards;
     }
 
-    private void initDefaultDeck() {
-        this.name = "default";
+    /**
+     * Gets a random card not in the given list of cards
+     *
+     * @param playedCards List of cards
+     * @return A card from this deck
+     */
+    public GameCard getRandomCardNotIn(final List<GameCard> playedCards) {
+        final Random randomGenerator = new Random();
 
-        final NfcCard nfcCardLion = new NfcCard("04787D22665D80", "Lion");
-        final NfcCard nfcCardGirafe = new NfcCard("04DC7D22665D80", "Girafe");
+        final List<GameCard> result = cards.stream()
+                .filter(card -> !playedCards.contains(card))
+                .collect(Collectors.toList());
 
-        final GameCard gameCardLion = new GameCard("Lion", "decks/default/cards/lion.mp3", nfcCardLion);
-        final GameCard gameCardGirafe = new GameCard("Girafe", "decks/default/cards/girafe.mp3", nfcCardGirafe);
-
-        cards.add(gameCardLion);
-        cards.add(gameCardGirafe);
+        int randomIndex = randomGenerator.nextInt(result.size());
+        return result.get(randomIndex);
     }
 
-    public GameCard getRandomCard() {
-        final Random rnd = new Random();
-        int randomIndex = rnd.nextInt(cards.size());
-        return cards.get(randomIndex);
-    }
-
-    public int getSize(){
+    public int getNumberOfCards() {
         return cards.size();
     }
 
-    public void removeCard(GameCard card){
-        cards.remove(card);
-    }
-
+    /**
+     * Returns a card of the deck depending on its physical bind badge
+     *
+     * @param nfcCard A card given by the nfc reader
+     * @return The corresponding game card
+     */
     public GameCard findCardFromNfc(final NfcCard nfcCard) {
         List<GameCard> result = cards.stream()
                 .filter(card -> card.getNfcCard().equals(nfcCard))
@@ -56,9 +56,13 @@ public class Deck implements Listenable {
         return null;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public void listen() {
-        AudioPlayer.playSound("decks/default/intro.mp3");
+        AudioPlayer.play("decks/default/intro.mp3");
     }
 
     @Override

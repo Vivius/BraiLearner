@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * Manages the tools reader data
  */
-public class NfcReader {
+public class NfcReader implements CardReader {
 
     private static String NFC_SOFTWARE_NAME = "explorenfc-basic";
 
@@ -58,6 +58,7 @@ public class NfcReader {
      *
      * @return NfcCard
      */
+    @Override
     public NfcCard readCard() {
         final StringBuilder reader = waitForNfcData();
         final Scanner scanner = new Scanner(reader.toString());

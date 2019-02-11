@@ -5,7 +5,7 @@ import tools.AudioPlayer;
 import tools.nfc.NfcCard;
 
 /**
- * A card uses in the play
+ * A card uses in the game and linked to a physical badge
  */
 public class GameCard implements Listenable {
 
@@ -43,6 +43,6 @@ public class GameCard implements Listenable {
 
     @Override
     public void listen() {
-        AudioPlayer.playSound(audioFilePath);
+        AudioPlayer.play(audioFilePath);
     }
 }
