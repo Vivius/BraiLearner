@@ -31,9 +31,11 @@ public class Game implements Listenable {
 
                 if (found) {
                     System.out.println("Correct word :)");
+                    listenCorrectWord();
                 }
                 else {
                     System.out.println("Incorrect word " + cardToFind.getName() + " /= " + card.getTitle());
+                    listenIncorrectWord();
                 }
 
             } while(!found);
@@ -53,5 +55,13 @@ public class Game implements Listenable {
 
     public void listenFindCard() {
         AudioPlayer.playSound("commons/find_card.mp3");
+    }
+
+    public void listenCorrectWord() {
+        AudioPlayer.playSound("advises/correct_word.mp3");
+    }
+
+    public void listenIncorrectWord() {
+        AudioPlayer.playSound("advises/incorrect_word.mp3");
     }
 }
