@@ -1,4 +1,4 @@
-package nfc;
+package tools;
 
 import model.NfcCard;
 
@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 
 /**
- * Manages the nfc reader data
+ * Manages the tools reader data
  */
 public class NfcReader {
 
