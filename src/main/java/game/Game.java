@@ -5,10 +5,6 @@ import tools.nfc.NfcReader;
 
 public class Game {
 
-    private boolean check(String valeur, String carte) {
-        return valeur.equals(carte);
-    }
-
     public void play(Deck deck, NfcReader nfcReader) {
         System.out.println("Bonjour vous allez commencez le jeu");
         deck.listen();

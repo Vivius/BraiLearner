@@ -18,7 +18,7 @@ public class Deck implements Listenable {
         final GameCard gameCard_1 = new GameCard("Lion", "decks/default/cards/lion.mp3", nfcCard_1);
 
         final NfcCard nfcCard_2 = new NfcCard("04DC7D22665D80", "Girafe");
-        final GameCard gameCard_2 = new GameCard("Girafe", "decks/default/cards/girage.mp3", nfcCard_2);
+        final GameCard gameCard_2 = new GameCard("Girafe", "decks/default/cards/girafe.mp3", nfcCard_2);
 
         cards.add(gameCard_1);
         cards.add(gameCard_2);
