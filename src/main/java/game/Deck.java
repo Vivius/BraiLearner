@@ -14,7 +14,7 @@ public class Deck implements Listenable {
     private List<GameCard> cards = new ArrayList<>();
 
     public Deck() {
-        final NfcCard nfcCard_1 = new NfcCard("04DC7D22665D80");
+        final NfcCard nfcCard_1 = new NfcCard("04787D22665D80");
         final GameCard gameCard_1 = new GameCard("Lion", "decks/default/cards/lion.mp3", nfcCard_1);
 
         final NfcCard nfcCard_2 = new NfcCard("04DC7D22665D80", "Girafe");
