@@ -1,7 +1,7 @@
 package game;
 
 import model.NfcCard;
-import nfc.NfcReader;
+import tools.NfcReader;
 
 public class Game {
 
