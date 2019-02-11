@@ -37,12 +37,12 @@ public class Deck implements Listenable {
         return cards.get(randomIndex);
     }
 
-    public int getTaille(){
+    public int getSize(){
         return cards.size();
     }
 
-    public void removeCard(GameCard carteTrouve){
-        cards.remove(carteTrouve);
+    public void removeCard(GameCard card){
+        cards.remove(card);
     }
 
     public GameCard findCardFromNfc(final NfcCard nfcCard) {

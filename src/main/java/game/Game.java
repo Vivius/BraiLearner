@@ -12,7 +12,7 @@ public class Game implements Listenable {
 
         deck.listen();
 
-        int nb = deck.getTaille();
+        int nb = deck.getSize();
         boolean cardFound = false;
 
         do {
