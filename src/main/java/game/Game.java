@@ -1,12 +1,15 @@
 package game;
 
+import game.contracts.Listenable;
+import tools.AudioPlayer;
 import tools.nfc.NfcCard;
 import tools.nfc.NfcReader;
 
-public class Game {
+public class Game implements Listenable {
 
     public void play(Deck deck, NfcReader nfcReader) {
-        System.out.println("Bonjour vous allez commencez le jeu");
+        System.out.println("Game started with default deck");
+        listen();
         deck.listen();
 
         int nb = 1;
@@ -15,20 +18,22 @@ public class Game {
 
         do {
             final GameCard cardToFind = deck.getRandomCard();
-            System.out.println("Le mot chercher est " + cardToFind.getName());
+            System.out.println("Word to find : " + cardToFind.getName());
+
+            listenFindCard();
             cardToFind.listen();
 
             do {
-                System.out.println("Présentez carte");
+                System.out.println("Scan card when ready...");
 
                 card = nfcReader.readCard();
                 found = cardToFind.getNfcCard().equals(card);
 
                 if (found) {
-                    System.out.println("Vous avez trouvé le bon mot");
+                    System.out.println("Correct word :)");
                 }
                 else {
-                    System.out.println("Faux ceci est le mot "+card.getTitle());
+                    System.out.println("Incorrect word " + cardToFind.getName() + " /= " + card.getTitle());
                 }
 
             } while(!found);
@@ -37,7 +42,16 @@ public class Game {
 
         } while(nb > 0);
 
-        System.out.println("Jeu finis");
+        System.out.println("Game finished");
     }
 
+    @Override
+    public void listen() {
+        AudioPlayer.playSound("commons/intro.mp3");
+        AudioPlayer.playSound("commons/consigne.mp3");
+    }
+
+    public void listenFindCard() {
+        AudioPlayer.playSound("commons/find_card.mp3");
+    }
 }
