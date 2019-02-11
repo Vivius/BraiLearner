@@ -9,7 +9,7 @@ public class Game {
         System.out.println("Bonjour vous allez commencez le jeu");
         deck.listen();
 
-        int nb = 1;
+        int nb = deck.getTaille();
         NfcCard card;
         boolean found = false;
 
@@ -32,7 +32,7 @@ public class Game {
                 }
 
             } while(!found);
-
+            deck.removeCard(cardToFind);
             nb--;
 
         } while(nb > 0);

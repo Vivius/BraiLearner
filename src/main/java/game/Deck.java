@@ -30,6 +30,14 @@ public class Deck implements Listenable {
         return cards.get(randomIndex);
     }
 
+    public int getTaille(){
+        return cards.size();
+    }
+
+    public void removeCard(GameCard carteTrouve){
+        cards.remove(carteTrouve);
+    }
+
     @Override
     public void listen() {
         AudioPlayer.playSound("decks/default/intro.mp3");
