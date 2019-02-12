@@ -88,15 +88,15 @@ public class Game implements Listenable {
                         else {
                             nbErrors++;
 
+                            System.out.println("Incorrect word " + userCard.getName() + " /= " + cardToFind.getName());
+                            listenIncorrectWord();
+
                             if(nbErrors == 2) {
                                 listenAdviseUppercase();
                             }
                             else if (nbErrors % 3 == 0 && nbErrors / 3 < cardToFind.getName().length()) {
                                 listenAdviseLetter(cardToFind.getName().toLowerCase().charAt(nbErrors / 3));
                             }
-
-                            System.out.println("Incorrect word " + userCard.getName() + " /= " + cardToFind.getName());
-                            listenIncorrectWord();
                         }
                     }
                 }
