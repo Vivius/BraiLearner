@@ -23,19 +23,31 @@ public class Game implements Listenable {
         this.cardReader = cardReader;
 
         // physical badges
-        final NfcCard nfcCardLion = new NfcCard("04787D22665D80", "Lion");
-        final NfcCard nfcCardGirafe = new NfcCard("04DC7D22665D80", "Girafe");
+        final NfcCard nfcCardLion = new NfcCard("04977D22665D80", "Lion");
+        final NfcCard nfcCardGirafe = new NfcCard("04FC7D22665D80", "Girafe");
+        final NfcCard nfcCardElephant = new NfcCard("04B97D22665D80", "Eléphant");
+        final NfcCard nfcCardSinge = new NfcCard("04DB7D22665D80", "Singe");
+        final NfcCard nfcCardTigre = new NfcCard("04DC7D22665D80", "Tigre");
 
         nfcCards.add(nfcCardLion);
         nfcCards.add(nfcCardGirafe);
+        nfcCards.add(nfcCardElephant);
+        nfcCards.add(nfcCardSinge);
+        nfcCards.add(nfcCardTigre);
 
         // virtual badges
         final GameCard gameCardLion = new GameCard("Lion", "decks/default/cards/lion.mp3", nfcCardLion);
         final GameCard gameCardGirafe = new GameCard("Girafe", "decks/default/cards/girafe.mp3", nfcCardGirafe);
+        final GameCard gameCardElephant = new GameCard("Eléphant", "decks/default/cards/elephant.mp3", nfcCardElephant);
+        final GameCard gameCardSinge = new GameCard("Singe", "decks/default/cards/singe.mp3", nfcCardSinge);
+        final GameCard gameCardTigre = new GameCard("Tigre", "decks/default/cards/tigre.mp3", nfcCardTigre);
 
         final List<GameCard> defaultDeckCards = new ArrayList<>();
         defaultDeckCards.add(gameCardLion);
         defaultDeckCards.add(gameCardGirafe);
+        defaultDeckCards.add(gameCardElephant);
+        defaultDeckCards.add(gameCardSinge);
+        defaultDeckCards.add(gameCardTigre);
 
         defaultDeck = new Deck("Default deck", defaultDeckCards);
         decks = new ArrayList<>();
