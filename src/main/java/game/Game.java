@@ -70,32 +70,34 @@ public class Game implements Listenable {
 
                 final GameCard userCard = deck.findCardFromNfc(cardReader.readCard());
 
-                if (playedCards.equals(userCard)){
-                    System.out.println("Vous avez déjà trouvé le mot :");
-                    userCard.listen();
-                }
-                // TODO : manage null result
                 if (userCard != null) {
 
-                    cardFound = cardToFind.equals(userCard);
-
-                    if (cardFound) {
-                        System.out.println("Correct word :)");
-                        playedCards.add(cardToFind);
-                        listenCorrectWord();
+                    if (playedCards.contains(userCard)) {
+                        System.out.println("Card already played");
+                        listenCardAlreadyPlayed();
                     }
                     else {
-                        nbErrors++;
+                        cardFound = cardToFind.equals(userCard);
 
-                        if(nbErrors == 2) {
-                            listenAdviseUppercase();
+                        if (cardFound) {
+                            System.out.println("Correct word :)");
+                            nbErrors = 0;
+                            playedCards.add(cardToFind);
+                            listenCorrectWord();
                         }
-                        else if (nbErrors % 3 == 0 && nbErrors / 3 < cardToFind.getName().length()) {
-                            listenAdviseLetter(cardToFind.getName().toLowerCase().charAt(nbErrors / 3));
-                        }
+                        else {
+                            nbErrors++;
 
-                        System.out.println("Incorrect word " + userCard.getName() + " /= " + cardToFind.getName());
-                        listenIncorrectWord();
+                            if(nbErrors == 2) {
+                                listenAdviseUppercase();
+                            }
+                            else if (nbErrors % 3 == 0 && nbErrors / 3 < cardToFind.getName().length()) {
+                                listenAdviseLetter(cardToFind.getName().toLowerCase().charAt(nbErrors / 3));
+                            }
+
+                            System.out.println("Incorrect word " + userCard.getName() + " /= " + cardToFind.getName());
+                            listenIncorrectWord();
+                        }
                     }
                 }
                 else {
@@ -110,6 +112,7 @@ public class Game implements Listenable {
         } while(nbRemainingCards > 0);
 
         System.out.println("Game finished");
+        listenGameFinished();
     }
 
     public Deck getDefaultDeck() {
@@ -128,6 +131,7 @@ public class Game implements Listenable {
     public void listen() {
         AudioPlayer.play("commons/intro.mp3");
         AudioPlayer.play("commons/consigne.mp3");
+        AudioPlayer.play("commons/alphabet.mp3");
     }
 
     private void listenFindCard() {
@@ -152,5 +156,13 @@ public class Game implements Listenable {
 
     private void listenAdviseLetter(char letter) {
         AudioPlayer.play("advises/letters/" + letter + ".mp3");
+    }
+
+    private void listenCardAlreadyPlayed() {
+        AudioPlayer.play("errors/already_played_card.mp3");
+    }
+
+    private void listenGameFinished() {
+        AudioPlayer.play("commons/congratulations.mp3");
     }
 }
