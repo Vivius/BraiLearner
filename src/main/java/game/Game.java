@@ -69,6 +69,10 @@ public class Game implements Listenable {
 
                 final GameCard userCard = deck.findCardFromNfc(cardReader.readCard());
 
+                if (playedCards.equals(userCard)){
+                    System.out.println("Vous avez déjà trouvé le mot :");
+                    userCard.listen();
+                }
                 // TODO : manage null result
                 if (userCard != null) {
 
