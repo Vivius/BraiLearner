@@ -67,7 +67,7 @@ public class Game implements Listenable {
         deck.listen();
 
         int nbRemainingCards = deck.getNumberOfCards();
-        int nbErrors = 0;
+        int nbErrors = 0, nbTotalErrors = 0;
         boolean cardFound;
 
         do {
@@ -100,15 +100,16 @@ public class Game implements Listenable {
                         }
                         else {
                             nbErrors++;
+                            nbTotalErrors++;
 
                             System.out.println("Incorrect word " + userCard.getName() + " /= " + cardToFind.getName());
                             listenIncorrectWord();
 
-                            if(nbErrors == 2) {
+                            if(nbTotalErrors == 2) {
                                 listenAdviseUppercase();
                             }
-                            else if (nbErrors % 3 == 0 && nbErrors / 3 < cardToFind.getName().length()) {
-                                listenAdviseLetter(cardToFind.getName().toLowerCase().charAt(nbErrors / 3 - 1));
+                            else if (nbErrors % 2 == 0 && nbErrors / 2 < cardToFind.getName().length()) {
+                                listenAdviseLetter(cardToFind.getName().toLowerCase().charAt(nbErrors / 2 - 1));
                             }
                         }
                     }
