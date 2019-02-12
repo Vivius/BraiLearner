@@ -107,7 +107,7 @@ public class Game implements Listenable {
                                 listenAdviseUppercase();
                             }
                             else if (nbErrors % 3 == 0 && nbErrors / 3 < cardToFind.getName().length()) {
-                                listenAdviseLetter(cardToFind.getName().toLowerCase().charAt(nbErrors / 3));
+                                listenAdviseLetter(cardToFind.getName().toLowerCase().charAt(nbErrors / 3 - 1));
                             }
                         }
                     }
