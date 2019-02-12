@@ -8,6 +8,7 @@ import tools.nfc.NfcCard;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Game implements Listenable {
 
@@ -36,11 +37,11 @@ public class Game implements Listenable {
         nfcCards.add(nfcCardTigre);
 
         // virtual badges
-        final GameCard gameCardLion = new GameCard("Lion", "decks/default/cards/lion.mp3", nfcCardLion);
-        final GameCard gameCardGirafe = new GameCard("Girafe", "decks/default/cards/girafe.mp3", nfcCardGirafe);
-        final GameCard gameCardElephant = new GameCard("Eléphant", "decks/default/cards/elephant.mp3", nfcCardElephant);
-        final GameCard gameCardSinge = new GameCard("Singe", "decks/default/cards/singe.mp3", nfcCardSinge);
-        final GameCard gameCardTigre = new GameCard("Tigre", "decks/default/cards/tigre.mp3", nfcCardTigre);
+        final GameCard gameCardLion = new GameCard("lion", "decks/default/cards/lion.mp3", nfcCardLion);
+        final GameCard gameCardGirafe = new GameCard("girafe", "decks/default/cards/girafe.mp3", nfcCardGirafe);
+        final GameCard gameCardElephant = new GameCard("éléphant", "decks/default/cards/elephant.mp3", nfcCardElephant);
+        final GameCard gameCardSinge = new GameCard("singe", "decks/default/cards/singe.mp3", nfcCardSinge);
+        final GameCard gameCardTigre = new GameCard("tigre", "decks/default/cards/tigre.mp3", nfcCardTigre);
 
         final List<GameCard> defaultDeckCards = new ArrayList<>();
         defaultDeckCards.add(gameCardLion);
@@ -155,7 +156,8 @@ public class Game implements Listenable {
     }
 
     private void listenIncorrectWord() {
-        AudioPlayer.play("advises/incorrect_word.mp3");
+        final Random randomGenerator = new Random();
+        AudioPlayer.play("advises/incorrect_word_" + (randomGenerator.nextInt(3) + 1) +".mp3");
     }
 
     private void listenCardNotInDeck() {
