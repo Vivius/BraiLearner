@@ -81,9 +81,10 @@ public class Game implements Listenable {
             do {
                 System.out.println("Scan card when ready...");
 
-                final GameCard userCard = deck.findCardFromNfc(cardReader.readCard());
+                final NfcCard nfcCard = cardReader.readCard();
+                final GameCard userCard = deck.findCardFromNfc(nfcCard);
 
-                if (userCard != null) {
+                if (userCard != null && nfcCard != null) {
 
                     if (playedCards.contains(userCard)) {
                         System.out.println("Card already played");
@@ -114,9 +115,13 @@ public class Game implements Listenable {
                         }
                     }
                 }
-                else {
+                else if (nfcCard != null) {
                     System.out.println("Card not present in this deck");
                     listenCardNotInDeck();
+                }
+                else {
+                    System.out.println("Error with NFC card");
+                    listenCardReadingError();
                 }
 
             } while(!cardFound);
@@ -179,5 +184,9 @@ public class Game implements Listenable {
 
     private void listenGameFinished() {
         AudioPlayer.play("commons/congratulations.mp3");
+    }
+
+    private void listenCardReadingError() {
+        AudioPlayer.play("errors/card_reading_error.mp3");
     }
 }

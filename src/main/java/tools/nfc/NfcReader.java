@@ -61,7 +61,14 @@ public class NfcReader implements CardReader {
     @Override
     public NfcCard readCard() {
         final StringBuilder reader = waitForNfcData();
-        final Scanner scanner = new Scanner(reader.toString());
+        final String data = reader.toString();
+
+        // return null if error during nfc reading
+        if (data.contains("Abandon") || data.contains("corrupted")) {
+            return null;
+        }
+
+        final Scanner scanner = new Scanner(data);
         final NfcCard card = new NfcCard();
 
         while (scanner.hasNextLine()) {
@@ -69,7 +76,9 @@ public class NfcReader implements CardReader {
 
             if (line.contains(":")) {
                 String[] vars = line.split(":");
-                vars[1] = vars[1].trim(); // remove spaces
+                // remove spaces
+                vars[0] = vars[0].trim();
+                vars[1] = vars[1].trim();
 
                 if (vars.length == 2) {
                     if (vars[0].equals("Record type")) {
